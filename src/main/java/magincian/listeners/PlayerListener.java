@@ -52,7 +52,14 @@ public class PlayerListener implements Listener {
     {
         String m = ServerManager.parseMessageStringContexted(
                 ServerManager.randomKickMessage(plugin),player.getUniqueId());
-        DiscordBot.sendMessageContexted("%player% ha sido expulsado por límite de tiempo",player.getUniqueId());
+        DiscordBot.sendMessageContexted(
+                "```ansi\n" +
+                "\u001b[1;31m %player% ha sido expulsado por límite de tiempo\n"+
+                "```"
+                ,player.getUniqueId());
+
+
+
         player.kickPlayer(m);
 
     }

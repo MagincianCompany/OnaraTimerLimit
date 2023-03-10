@@ -152,7 +152,17 @@ public class ServerManager {
         }
     }
 
-    public static String parseMessageString(String s)
+    private static  String parseMessageStringSpecificDiscord(String s)
+    {
+        s = s.replace("%red%","§c");
+        return  s;
+    }
+    private static  String parseMessageStringSpecificMinecraft(String s)
+    {
+        s = s.replace("%red%","§c");
+        return  s;
+    }
+    public static String parseMessageString(String s,MessageOut out)
     {
         /*
             %t% -> tiempo restante para el reinicio en segundos
@@ -161,6 +171,12 @@ public class ServerManager {
             %td% -> tiempo restante para el reinicio en dias
             %tdate% -> dia y hora del reinicio
          */
+
+        if(out == MessageOut.MINECRAFT)
+            s = parseMessageStringSpecificMinecraft(s);
+        else
+            s = parseMessageStringSpecificDiscord(s);
+
         Float seconds =(RESETDELTASECONDS-(Long)ChronoUnit.SECONDS.between(lastReset,LocalDateTime.now()))/1f;
         System.out.println(seconds);
         s = s.replace("%t%",seconds.toString());
@@ -199,18 +215,19 @@ public class ServerManager {
     }
     public static String randomKickMessage(OnaraTimeLimit plugin)
     {
+
         Random rand = new Random();
         System.out.println(plugin.kickMessage.size());
         Integer r = rand.nextInt(plugin.kickMessage.size());
         return plugin.kickMessage.get(r);
     }
-    public static String parseMessageStringContexted(String s, UUID uuid)
+    public static String parseMessageStringContexted(String s, UUID uuid,MessageOut out)
     {
         /*
             %player% -> obtiene el nombre del jugador
         */
 
-        s = parseMessageString(s);
+        s = parseMessageString(s,out);
         s = s.replace(
                 "%player%",
                 Bukkit.getPlayer(uuid).getName()

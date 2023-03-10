@@ -154,7 +154,7 @@ public class ServerManager {
 
     private static  String parseMessageStringSpecificDiscord(String s)
     {
-        s = s.replace("%red%","§c");
+        s = s.replace("%red%","\u001b[0;31m");
         return  s;
     }
     private static  String parseMessageStringSpecificMinecraft(String s)

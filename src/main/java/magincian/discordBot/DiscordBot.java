@@ -1,6 +1,7 @@
 package magincian.discordBot;
 
 import magincian.main.OnaraTimeLimit;
+import magincian.manager.MessageOut;
 import magincian.manager.ServerManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -41,7 +42,10 @@ public abstract class DiscordBot {
         Guild g = bot.getGuildById(plugin.getConfig().getLong("discord.serverId"));
         TextChannel c = bot.getTextChannelById(plugin.getConfig().getLong("discord.channelId"));
         c.sendMessage(
-                ServerManager.parseMessageString(message)
+                ServerManager.parseMessageString(
+                        "```ansi\n"+
+                        message+
+                        "```",MessageOut.DISCORD)
         ).queue();
 
     }
@@ -51,7 +55,11 @@ public abstract class DiscordBot {
         Guild g = bot.getGuildById(plugin.getConfig().getLong("discord.serverId"));
         TextChannel c = bot.getTextChannelById(plugin.getConfig().getLong("discord.channelId"));
         c.sendMessage(
-                ServerManager.parseMessageStringContexted(message,uuid)
+                ServerManager.parseMessageStringContexted(
+                        "```ansi\n"+
+                        message+
+                        "```"
+                        ,uuid, MessageOut.DISCORD)
         ).queue();
 
     }

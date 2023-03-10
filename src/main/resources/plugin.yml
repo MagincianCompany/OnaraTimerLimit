@@ -1,0 +1,17 @@
+name: OnaraTimeLimit
+version: '${project.version}'
+main: magincian.main.OnaraTimeLimit
+api-version: 1.19
+
+commands:
+  ct:
+    description: te permite ver tu tiempo
+    usage: /<command>
+    permission: otl.ct
+
+permissions:
+  otl.ct:
+    description: lets a player do something or other
+  otl.nolimit:
+    description: hace que un jugador sea inmune a el tiempo
+    default: op

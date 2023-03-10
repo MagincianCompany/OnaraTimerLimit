@@ -1,0 +1,13 @@
+limiter:
+  timeRun: 1
+  permitedSeconds: 300
+  resetDeltaSeconds: 500
+
+phrase:
+  kickByTime:
+    - tiempo acabado %player%, podrás volver en %t% segundos o %tm% minutos
+
+discord:
+  token: token
+  serverId: serverid
+  channelId: channelId
